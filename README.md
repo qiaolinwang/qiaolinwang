@@ -4,7 +4,7 @@
 <h3 align="center">An undergraduate student from Wuhan University</h3>
  
  <p align="center" >
-<img align="center" height="270px" width="490px" alt="GIF" src="https://i.redd.it/80nk886k9cb71.gif"/>
+<img align="center" height="200px" width="490px" alt="GIF" src="https://i.redd.it/80nk886k9cb71.gif"/>
 
 - 🔭 I’m currently working on [Text-to-Speech Models](https://github.com/JOETtheIV/VITS-Paimon)
 
