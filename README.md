@@ -12,5 +12,5 @@
 - 🍰 My bilibili acount: [Venti_J的个人空间](https://b23.tv/6tNEr6t)
 
 - ⚡ I am also a hip-hop music artist & producer!   Netease Cloud Music: [Venti_J的歌手页](https://music.163.com/#/artist?app_version=8.8.20&id=37561474&dlt=0846)
-
-[![JOETtheIV's GitHub stats](https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&theme=tokyonight)](https://github.com/JOETtheIV/github-readme-stats)
+| <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=buefy&hide_border=true" alt="Venti J's github stats" /></a> | <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=JOETtheIV&layout=compact&theme=buefy&hide_border=true" /></a> |
+| ------------- | ------------- |
