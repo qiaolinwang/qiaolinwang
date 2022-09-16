@@ -8,7 +8,7 @@
 
 - 🔭 I’m currently working on [Text-to-Speech Models](https://github.com/JOETtheIV/VITS-Paimon)
 
-- 📫 How to reach me **Venti1217@whu.edu.cn**
+- 📫 How to reach me **venti1217@qq.com**
 
 - 💻 I'm deeply interested in Speech Synthesis and Image-Generation/Translation
 
