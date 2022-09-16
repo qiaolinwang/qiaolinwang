@@ -5,11 +5,11 @@
 
 - 📫 How to reach me **Venti1217@whu.edu.cn**
 
-- 💻 I'm deeply interested in **Speech Synthesis and Image-Generation/Translation**
+- 💻 I'm deeply interested in Speech Synthesis and Image-Generation/Translation
 
-- 📄 I’m majoring in **Computer Science and Engineering**
+- 📄 I’m majoring in Computer Science and Engineering
 
-- 🍰 My bilibili acount [Venti_J](https://b23.tv/6tNEr6t)
+- 🍰 My bilibili acount: [Venti_J](https://b23.tv/6tNEr6t)
 
 - ⚡ I am also a hip-hop music artist & producer!   Netease Cloud Music: [Venti_J](https://music.163.com/#/artist?app_version=8.8.20&id=37561474&dlt=0846)
 
