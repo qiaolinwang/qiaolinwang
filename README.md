@@ -21,3 +21,5 @@
  <p align="center" >
  <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=flase" alt="Venti J's github stats" /></a> 
 
+ <p align="center" >
+ <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://activity-graph.herokuapp.com/graph?username=Francis-Komizu&theme=react-dark" alt="Francis's github activity graph" /></a> 
