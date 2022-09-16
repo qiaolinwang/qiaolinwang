@@ -17,4 +17,4 @@
  <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=flase" alt="Venti J's github stats" /></a> 
 
 <br />
-<img align="center" height="270px" width="450px" alt="GIFV" src="https://www.tumpik.com/tag/genshin%https://64.media.tumblr.com/1341c68fe672dbc79648206872bfbd9b/ca9e629fe28c8e22-08/s540x810/1f034070966f411e6dcad44784ba9b65466fd436.gifv"/>
+<img align="center" height="270px" width="450px" alt="GIF" src=https://github.com/JOETtheIV/JOETtheIV/blob/main/tumblr_1341c68fe672dbc79648206872bfbd9b_1f034070_540.gif?raw=true"/>
