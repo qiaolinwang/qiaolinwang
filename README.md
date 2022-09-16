@@ -17,4 +17,4 @@
  <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=flase" alt="Venti J's github stats" /></a> 
 
 <br />
-<img align="center" height="270px" width="450px" alt="GIF" src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif" />
+<img align="center" height="270px" width="450px" alt="GIF" src="https://i.redd.it/zrfys86k9cb71.gif" />
