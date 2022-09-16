@@ -2,8 +2,8 @@
    <h1>Hi, I'm Venti_J</a> <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px"> </h1>
 </div>   
 <h3 align="center">An undergraduate student from Wuhan University</h3>
-
-<br />
+ 
+ <p align="center" >
 <img align="center" height="270px" width="490px" alt="GIF" src="https://i.redd.it/80nk886k9cb71.gif"/>
 
 - 🔭 I’m currently working on [Text-to-Speech Models](https://github.com/JOETtheIV/VITS-Paimon)
