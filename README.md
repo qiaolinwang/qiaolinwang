@@ -16,4 +16,7 @@
  <p align="center" >
  <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=flase" alt="Venti J's github stats" /></a> 
 <br />
-<img align="center" height="270px" width="450px" alt="GIF" src=https://github.com/JOETtheIV/JOETtheIV/blob/main/tumblr_1341c68fe672dbc79648206872bfbd9b_1f034070_540.gif?raw=true"/>
+<img align="center" height="270px" width="450px" alt="GIF" src="https://github.com/JOETtheIV/JOETtheIV/blob/main/tumblr_1341c68fe672dbc79648206872bfbd9b_1f034070_540.gif?raw=true"/>
+
+<br />
+<img align="center" height="270px" width="450px" alt="GIF" src="https://i.redd.it/80nk886k9cb71.gif"/>
