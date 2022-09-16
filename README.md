@@ -13,6 +13,6 @@
 
 - ⚡ I am also a hip-hop music artist & producer!   Netease Cloud Music: [Venti_J的歌手页](https://music.163.com/#/artist?app_version=8.8.20&id=37561474&dlt=0846)
 <br />
-<img align="right" height="270px" width="450px" alt="GIF" src="https://media.giphy.com/media/3FjEPbKqEPhPpmC8uY/giphy.gif" />
+<img align="right" height="270px" width="450px" alt="GIF" src="https://raw.githubusercontent.com/abhisheknaiidu/abhisheknaiidu/master/code.gif" />
  <p align="center" >
  <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=flase" alt="Venti J's github stats" /></a> 
