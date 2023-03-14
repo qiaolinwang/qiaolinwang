@@ -22,5 +22,3 @@
 <img align="center" src="https://activity-graph.herokuapp.com/graph?username=JOETtheIV&theme=react-dark" alt="Venti_J's github activity graph" /></a> 
  -->
 
- <p align="center" >
-<img align="center" height="270px" width="490px" alt="GIF" src="https://i.redd.it/80nk886k9cb71.gif"/>
