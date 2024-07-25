@@ -3,17 +3,17 @@
 </div>   
 <h3 align="center">A CS student from Wuhan University, current MSEE at Columbia University </h3>
  
-- 🔭 I’m currently working on [Text-to-Speech Models](https://github.com/JOETtheIV/VITS-Paimon)
+- 🔭 I’m currently working on Speech LLM, Multimodal Fusion and Emotion Recognition models
 
-- 📫 How to reach me **venti1217@qq.com** or **joeyventicup@gmail.com** QQ:2997685348
+- 📫 You can reach me at qw2443@columbia.edu or joeyventicup@gmail.com.
 
-- 💻 I'm deeply interested in Speech Synthesis and Image-Generation/Translation
+- 💻 I have a deep interest in Speech Processing and Large Language Models.
 
-- 📄 I’m majoring in Computer Science and Engineering
+- 📄 I hold a Bachelor of Computer Science and Engineering and am pursuing a Master's in Electrical Engineering starting Fall 2024.
 
 - 🍰 My bilibili acount: [Venti_J的个人空间](https://b23.tv/6tNEr6t)
 
-- ⚡ I am also a hip-hop music artist & producer!   Netease Cloud Music: [Venti_J的歌手页](https://music.163.com/#/artist?app_version=8.8.20&id=37561474&dlt=0846)
+- ⚡ I am also a hip-hop music artist and producer! Check out my Netease Cloud Music:  [Venti_J的歌手页](https://music.163.com/#/artist?app_version=8.8.20&id=37561474&dlt=0846)
 
  <p align="center" >
  <a href="https://github.com/JOETtheIV/github-readme-stats"><img align="center" src="https://github-readme-stats.vercel.app/api?username=JOETtheIV&show_icons=true&include_all_commits=true&theme=tokyonight&hide_border=flase" alt="Venti J's github stats" /></a> 
