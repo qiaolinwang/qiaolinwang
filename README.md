@@ -29,7 +29,7 @@
   <img src="https://skillicons.dev/icons?i=py,pytorch,cpp,bash,linux,docker,git,github,latex,vscode&theme=dark" />
 </p>
 
-### ⭐ Stars in 3D
+### ⭐ GitHub Stars in 3D
 
 <p align="center">
   <img src="profile-3d-stars/stars-galaxy.svg" width="100%" />
