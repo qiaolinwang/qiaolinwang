@@ -42,6 +42,7 @@ def request(url, token, body=None):
             return json.load(r)
     except urllib.error.HTTPError as e:
         e.detail = e.read().decode(errors="replace")[:300]
+        e.wants = e.headers.get("X-Accepted-GitHub-Permissions", "")
         raise
 
 
@@ -99,7 +100,7 @@ def fetch_stars(user, token):
             try:
                 dates = stargazers_graphql(repo["full_name"], token)
             except (urllib.error.HTTPError, RuntimeError) as gql_err:
-                print(f"refused  {name}: REST {rest_err.code} {rest_err.detail[:90]} | GraphQL {getattr(gql_err, 'detail', gql_err)}")
+                print(f"refused  {name}: REST {rest_err.code} (token needs: {rest_err.wants or 'not stated'}) | GraphQL {getattr(gql_err, 'detail', gql_err)}")
                 refused.append(repo["stargazers_count"])
                 continue
         print(f"ok       {name}: {len(dates)} star dates")
