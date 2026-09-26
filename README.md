@@ -22,7 +22,7 @@
 My speech AI journey began as a side quest in 2022: teaching a model to speak as Paimon from Genshin Impact.
 
 <p align="center">
-  <a href="https://www.bilibili.com/video/BV16G4y1B7Ey/"><img src="assets/paimon-preview.svg" width="85%" alt="I Used AI to Clone Paimon's Voice (Bilibili)" /></a>
+  <a href="https://www.bilibili.com/video/BV16G4y1B7Ey/"><img src="paimon-preview.svg" width="85%" alt="I Used AI to Clone Paimon's Voice (Bilibili)" /></a>
 </p>
 
 - Built and annotated a multi-speaker dataset of ≈48,000 clips (15 h) from 50 Genshin Impact characters, using ECAPA-TDNN for speaker classification and Whisper for transcription
