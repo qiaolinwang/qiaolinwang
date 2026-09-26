@@ -48,7 +48,7 @@
 
 My speech AI journey began as a side quest in 2022: teaching a model to speak as Paimon from Genshin Impact.
 
-https://github.com/user-attachments/assets/e6e4a951-b90d-4d03-9a5b-030edbc7fb24
+https://github.com/user-attachments/assets/8ad413b8-865d-4f47-97a2-682d8b24791b
 
 - Built and annotated a multi-speaker dataset of ≈48,000 clips (15 h) from 50 Genshin Impact characters, using ECAPA-TDNN for speaker classification and Whisper for transcription
 - Fine-tuned a VITS speech synthesis model on a curated set of Paimon clips
