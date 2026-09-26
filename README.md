@@ -17,18 +17,6 @@
 - 🏠 Homepage: [qiaolinwang.github.io](https://qiaolinwang.github.io/) · [LinkedIn](https://www.linkedin.com/in/qiaolin-wang-827545337/)
 - ⚡ I'm also a hip-hop artist and producer. Find me on NetEase Cloud Music: [Venti_J](https://music.163.com/#/artist?id=37561474)
 
-### 🎬 Where it started
-
-My speech AI journey began as a side quest in 2022: teaching a model to speak as Paimon from Genshin Impact.
-
-<p align="center">
-  <a href="https://qiaolinwang.github.io/projects/paimon-voice/"><img src="paimon-preview.svg" width="85%" alt="I Used AI to Clone Paimon's Voice" /></a>
-</p>
-
-- Built and annotated a multi-speaker dataset of ≈48,000 clips (15 h) from 50 Genshin Impact characters, using ECAPA-TDNN for speaker classification and Whisper for transcription
-- Fine-tuned a VITS speech synthesis model on a curated set of Paimon clips
-- Released it as a technical demo on Bilibili (600K+ views) with a public [Colab](https://colab.research.google.com/drive/1HDV84t3N-yUEBXN8dDIDSv6CzEJykCLw) for anyone to try
-
 ### 📄 Publications
 
 - **AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking**, COLM 2026. [arXiv:2601.17645](https://arxiv.org/abs/2601.17645)
@@ -55,6 +43,16 @@ My speech AI journey began as a side quest in 2022: teaching a model to speak as
   <img src="https://img.shields.io/github/stars/qiaolinwang?affiliations=OWNER&style=for-the-badge&logo=github&label=Stars&color=7aa2f7&labelColor=1a1b27" />
   <img src="https://img.shields.io/github/followers/qiaolinwang?style=for-the-badge&logo=github&label=Followers&color=7aa2f7&labelColor=1a1b27" />
 </p>
+
+### 🎬 Where it started
+
+My speech AI journey began as a side quest in 2022: teaching a model to speak as Paimon from Genshin Impact.
+
+https://github.com/user-attachments/assets/e6e4a951-b90d-4d03-9a5b-030edbc7fb24
+
+- Built and annotated a multi-speaker dataset of ≈48,000 clips (15 h) from 50 Genshin Impact characters, using ECAPA-TDNN for speaker classification and Whisper for transcription
+- Fine-tuned a VITS speech synthesis model on a curated set of Paimon clips
+- Released it as a technical demo on Bilibili (600K+ views) with a public [Colab](https://colab.research.google.com/drive/1HDV84t3N-yUEBXN8dDIDSv6CzEJykCLw) for anyone to try
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:7aa2f7,100:1a1b27&height=100&section=footer" width="100%" />
