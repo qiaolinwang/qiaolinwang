@@ -31,10 +31,6 @@ My speech AI journey began as a side quest in 2022: teaching a model to speak as
 
 ### 📄 Publications
 
-<p align="center">
-  <a href="https://avmemeexam.github.io/public"><img src="avmeme_exam_banner.png" width="80%" alt="AVMeme Exam" /></a>
-</p>
-
 - **AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking**, COLM 2026. [arXiv:2601.17645](https://arxiv.org/abs/2601.17645)
 - **SightSound-R1: Cross-Modal Reasoning Distillation from Vision to Audio Language Models**, ICASSP 2026. [IEEE](https://ieeexplore.ieee.org/document/11463295/) · [arXiv:2509.15661](https://arxiv.org/abs/2509.15661)
 - **Layer-wise Minimal Pair Probing Reveals Contextual Grammatical-Conceptual Hierarchy in Speech Representations**, EMNLP 2025 (SAC Highlight). [arXiv:2509.15655](https://arxiv.org/abs/2509.15655)
