@@ -60,6 +60,8 @@ def stargazers_rest(full_name, token):
     dates, page = [], 1
     while True:
         batch = request(f"{API}/repos/{full_name}/stargazers?per_page=100&page={page}", token)
+        if not isinstance(batch, list):
+            raise RuntimeError(f"unexpected response: {str(batch)[:200]}")
         dates += [s["starred_at"] for s in batch]
         if len(batch) < 100:
             return dates
@@ -89,26 +91,31 @@ def fetch_stars(user, token):
         if len(batch) < 100:
             break
         page += 1
-    stars, refused = [], []
+    stars, missing = [], []
     for repo in repos:
         if repo["stargazers_count"] == 0:
             continue
-        name = f"{repo['full_name']} ({'fork' if repo['fork'] else 'source'}, {repo['stargazers_count']} stars)"
-        try:
-            dates = stargazers_rest(repo["full_name"], token)
-        except urllib.error.HTTPError as rest_err:
+        name = f"{repo['full_name']} ({repo['stargazers_count']} stars)"
+        tried = []
+        dates = []
+        for label, fetch in (("REST", stargazers_rest), ("GraphQL", stargazers_graphql)):
             try:
-                dates = stargazers_graphql(repo["full_name"], token)
-            except (urllib.error.HTTPError, RuntimeError) as gql_err:
-                print(f"refused  {name}: REST {rest_err.code} (token needs: {rest_err.wants or 'not stated'}) | GraphQL {getattr(gql_err, 'detail', gql_err)}")
-                refused.append(repo["stargazers_count"])
-                continue
-        print(f"ok       {name}: {len(dates)} star dates")
+                dates = fetch(repo["full_name"], token)
+                tried.append(f"{label} {len(dates)}")
+            except urllib.error.HTTPError as err:
+                tried.append(f"{label} HTTP {err.code} (needs: {err.wants or 'not stated'})")
+            except RuntimeError as err:
+                tried.append(f"{label} error: {err}")
+            if dates:
+                break
+        print(f"{'ok' if dates else 'EMPTY':6} {name}: " + " | ".join(tried))
+        if not dates:
+            missing.append(repo["stargazers_count"])
         stars += [(d, repo["name"]) for d in dates]
-    if refused:
-        print(f"::warning::{len(refused)} repos ({sum(refused)} stars) refused their stargazer list and are left out")
+    if missing:
+        print(f"::warning::{len(missing)} repos ({sum(missing)} stars) returned no star dates and are left out")
     if not stars:
-        sys.exit("Every stargazer list was refused. STARS_TOKEN needs read access to these repositories.")
+        sys.exit("GitHub returned no star dates for any repository with this token.")
     return sorted(stars)
 
 
