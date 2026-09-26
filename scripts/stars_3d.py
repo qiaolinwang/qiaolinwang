@@ -112,11 +112,15 @@ def fetch_stars(user, token):
         if not dates:
             missing.append(repo["stargazers_count"])
         stars += [(d, repo["name"]) for d in dates]
+    if not stars:
+        # GitHub no longer hands out stargazer dates to this token. Star counts are still public,
+        # so draw every star at its repo's creation date and say so on the image.
+        print("::notice::No per-star dates available; placing each repo's stars at its creation date.")
+        starred = [r for r in repos if r["stargazers_count"] > 0]
+        return sorted((r["created_at"], r["name"]) for r in starred for _ in range(r["stargazers_count"])), True
     if missing:
         print(f"::warning::{len(missing)} repos ({sum(missing)} stars) returned no star dates and are left out")
-    if not stars:
-        sys.exit("GitHub returned no star dates for any repository with this token.")
-    return sorted(stars)
+    return sorted(stars), False
 
 
 def parse(iso):
@@ -164,7 +168,7 @@ def legend(x, y, stars, ranked, colours, top=5):
     return "".join(out), y + 24 + len(rows) * 22
 
 
-def render_galaxy(user, stars, now):
+def render_galaxy(user, stars, now, by_repo=False):
     W, H = 900, 480
     cx, cy, R, K = 350, 272, 285, 0.34      # centre, disc radius, squash (camera elevation)
     roll = math.radians(-9)
@@ -204,14 +208,14 @@ def render_galaxy(user, stars, now):
     rings.append(f'<text x="{ex + 8:.0f}" y="{ey + 4:.0f}" class="yr now">now</text>')
 
     particles, pulses = [], []
-    newest = len(stars) - 3
+    newest = len(stars) if by_repo else len(stars) - 3  # no per-star dates, so no "newest"
     for idx, (iso, repo) in enumerate(stars):
         t = parse(iso)
         rho = min(1.0, max(rho_min * 0.6, rho_at(idx + 0.5) + rng.gauss(0, 0.01)))
         arm = idx % 2
         phi0 = arm * math.pi + 3.1 * math.log(rho / rho_min) + rng.gauss(0, 0.16 + 0.22 * (1 - rho))
         hour = t.hour + t.minute / 60
-        h = (hour / 24 - 0.5) * 2 * 15 * (1 - 0.45 * rho)
+        h = (rng.uniform(-1, 1) if by_repo else hour / 24 * 2 - 1) * 15 * (1 - 0.45 * rho)
         base = 3.0 + (1.6 if idx >= newest else 0) + rng.uniform(-0.4, 0.6)
         pts, radii, alphas = [], [], []
         for j in range(steps + 1):
@@ -231,7 +235,7 @@ def render_galaxy(user, stars, now):
             f'<circle r="{radii[0]}" fill="url(#g{gid[colour]})">{motion}'
             f'<animate attributeName="r" dur="{period}s" repeatCount="indefinite" values="{";".join(radii)}"/>'
             f'<animate attributeName="opacity" dur="{period}s" repeatCount="indefinite" values="{";".join(alphas)}"/>'
-            f'<title>{repo} · {iso[:10]}</title></circle>')
+            f'<title>{repo} · {"created " + iso[:7] if by_repo else iso[:10]}</title></circle>')
         if idx >= newest:
             pulses.append(
                 f'<circle r="4" fill="none" stroke="{colour}" stroke-width="1.2">{motion}'
@@ -240,14 +244,20 @@ def render_galaxy(user, stars, now):
 
     leg, ly = legend(690, 150, stars, ranked, colours)
     key = [
+        "outward = newer repo · rings = years",
+        "colour → repository",
+        "one particle per star",
+        f"one turn / {period} s",
+    ] if by_repo else [
         "outward = later · rings = new year",
         "colour → repository",
         "height above disc → hour (UTC)",
         f"newest pulse · one turn / {period} s",
     ]
     keys = "".join(f'<text x="690" y="{ly + 30 + i * 19}" class="s">{k}</text>' for i, k in enumerate(key))
-    last_year = sum(1 for iso, _ in stars if (now - parse(iso)).days < 365)
+    last_year = 0 if by_repo else sum(1 for iso, _ in stars if (now - parse(iso)).days < 365)
     sub = f"+{last_year} in the last year · " if last_year else ""
+    tail = "placed by when each repo was created" if by_repo else f"since {t0:%b %Y}"
 
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
 <defs>{grads}
@@ -281,13 +291,13 @@ def render_galaxy(user, stars, now):
 {"".join(pulses)}
 <path fill="#e0af68" transform="translate(30 24) scale(1.35)" d="M12 .6l3.4 7 7.6 1.1-5.5 5.4 1.3 7.6L12 18.1l-6.8 3.6 1.3-7.6L1 8.7l7.6-1.1z"/>
 <text x="70" y="50" class="h">{len(stars)} stars</text>
-<text x="71" y="72" class="s">{sub}every star @{user}'s repos have earned, since {t0:%b %Y}</text>
+<text x="71" y="72" class="s">{sub}every star @{user}'s repos have earned, {tail}</text>
 {leg}{keys}
 </svg>
 '''
 
 
-def render_city(user, stars, now):
+def render_city(user, stars, now, by_repo=False):
     W, H = 900, 460
     ranked, colours = repo_colours(stars)
     rows = ranked[:5] + (["others"] if len(ranked) > 5 else [])
@@ -376,7 +386,7 @@ def render_city(user, stars, now):
                      + poly(mix(c_hex, "#ffffff", 0.25), [pt(a0, b0, z), pt(a1, b0, z), pt(a1, b1, z), pt(a0, b1, z)]))
             y, q = quarters[i]
             out.append(f'<g class="b" style="animation-delay:{0.15 * r + 0.05 * i:.2f}s">'
-                       f'<title>{rows[r]} · {y} Q{q + 1}: {v} star{"s" if v > 1 else ""}</title>{faces}</g>')
+                       f'<title>{rows[r]} · {"created " if by_repo else ""}{y} Q{q + 1}: {v} star{"s" if v > 1 else ""}</title>{faces}</g>')
         x, y = xy(-26, b0 + deep / 2, 0)
         count = sum(v for (rr, _), v in grid.items() if rr == r)
         out.append(f'<text x="{x:.1f}" y="{y + 4:.1f}" class="l" text-anchor="end" fill="{c_hex}">'
@@ -386,6 +396,8 @@ def render_city(user, stars, now):
             x, yy = xy(i * step, B + 4, 0)
             out.append(f'<text x="{x:.1f}" y="{yy + 12:.1f}" class="yr">{y}</text>')
 
+    subtitle = ("stars per repository, placed at the quarter it was created · tower height ∝ √stars · back wall = running total"
+                if by_repo else "stars per quarter × repository · tower height ∝ √stars · back wall = running total")
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">
 <defs>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16161e"/><stop offset="1" stop-color="#1f2335"/></linearGradient>
@@ -398,9 +410,9 @@ def render_city(user, stars, now):
 .n{{font:700 12px {FONT};fill:#c0caf5}}
 .yr{{font:400 10px {FONT};fill:#565f89}}
 .gl{{fill:none;stroke:#2f334d;stroke-width:.6;stroke-dasharray:2 3}}
-.cum{{fill:none;stroke:#7dcfff;stroke-width:2;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.6s .4s ease-out forwards}}
-@keyframes draw{{to{{stroke-dashoffset:0}}}}
-.b{{opacity:0;animation:rise .8s cubic-bezier(.2,.9,.3,1.2) forwards}}
+.cum{{fill:none;stroke:#7dcfff;stroke-width:2;stroke-linejoin:round;stroke-dasharray:1;animation:draw 2.6s .4s ease-out backwards}}
+@keyframes draw{{from{{stroke-dashoffset:1}}to{{stroke-dashoffset:0}}}}
+.b{{animation:rise .8s cubic-bezier(.2,.9,.3,1.2) backwards}}
 @keyframes rise{{from{{opacity:0;transform:translateY(30px)}}to{{opacity:1;transform:translateY(0)}}}}
 .tw{{fill:#c0caf5;animation:tw ease-in-out infinite alternate}}
 @keyframes tw{{from{{opacity:.05}}to{{opacity:.45}}}}
@@ -408,7 +420,7 @@ def render_city(user, stars, now):
 <rect width="{W}" height="{H}" rx="12" fill="url(#bg)"/>
 {twinkles(W, H, 11, 60)}
 <text x="30" y="46" class="h">Where the stars landed</text>
-<text x="31" y="68" class="s">stars per quarter × repository · tower height ∝ √stars · back wall = running total</text>
+<text x="31" y="68" class="s">{subtitle}</text>
 {"".join(out)}
 </svg>
 '''
@@ -418,16 +430,17 @@ def main():
     user, out_dir = sys.argv[1], sys.argv[2]
     if "--from-json" in sys.argv:
         stars = sorted(tuple(s) for s in json.load(open(sys.argv[sys.argv.index("--from-json") + 1])))
+        by_repo = "--by-repo" in sys.argv
     else:
-        stars = fetch_stars(user, os.environ.get("STARS_TOKEN") or os.environ["GITHUB_TOKEN"])
+        stars, by_repo = fetch_stars(user, os.environ.get("STARS_TOKEN") or os.environ["GITHUB_TOKEN"])
     if not stars:
         sys.exit("no stars yet")
     now = datetime.now(timezone.utc)
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "stars-galaxy.svg"), "w") as f:
-        f.write(render_galaxy(user, stars, now))
+        f.write(render_galaxy(user, stars, now, by_repo))
     with open(os.path.join(out_dir, "stars-city.svg"), "w") as f:
-        f.write(render_city(user, stars, now))
+        f.write(render_city(user, stars, now, by_repo))
 
 
 if __name__ == "__main__":
