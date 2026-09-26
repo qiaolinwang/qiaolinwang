@@ -88,21 +88,26 @@ def fetch_stars(user, token):
         if len(batch) < 100:
             break
         page += 1
-    stars = []
+    stars, refused = [], []
     for repo in repos:
         if repo["stargazers_count"] == 0:
             continue
+        name = f"{repo['full_name']} ({'fork' if repo['fork'] else 'source'}, {repo['stargazers_count']} stars)"
         try:
             dates = stargazers_rest(repo["full_name"], token)
         except urllib.error.HTTPError as rest_err:
-            print(f"REST stargazers refused for {repo['full_name']}: HTTP {rest_err.code} {rest_err.detail}")
             try:
                 dates = stargazers_graphql(repo["full_name"], token)
             except (urllib.error.HTTPError, RuntimeError) as gql_err:
-                sys.exit(f"GraphQL refused too: {getattr(gql_err, 'detail', gql_err)}\n"
-                         "Add a fine-grained personal access token (public repositories, read-only) "
-                         "as the repository secret STARS_TOKEN.")
+                print(f"refused  {name}: REST {rest_err.code} {rest_err.detail[:90]} | GraphQL {getattr(gql_err, 'detail', gql_err)}")
+                refused.append(repo["stargazers_count"])
+                continue
+        print(f"ok       {name}: {len(dates)} star dates")
         stars += [(d, repo["name"]) for d in dates]
+    if refused:
+        print(f"::warning::{len(refused)} repos ({sum(refused)} stars) refused their stargazer list and are left out")
+    if not stars:
+        sys.exit("Every stargazer list was refused. STARS_TOKEN needs read access to these repositories.")
     return sorted(stars)
 
 
