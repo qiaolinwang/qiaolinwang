@@ -19,6 +19,7 @@ jobs:
       - name: Render star galaxy + star city
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STARS_TOKEN: ${{ secrets.STARS_TOKEN }}
         run: python3 scripts/stars_3d.py ${{ github.repository_owner }} profile-3d-stars
       - name: Commit
         run: |
