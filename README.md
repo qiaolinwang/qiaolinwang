@@ -40,8 +40,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/qiaolinwang?tab=repositories&sort=stargazers"><img src="https://img.shields.io/github/stars/qiaolinwang?affiliations=OWNER&style=for-the-badge&logo=github&label=Stars&color=7aa2f7&labelColor=1a1b27" /></a>
-  <a href="https://github.com/qiaolinwang?tab=followers"><img src="https://img.shields.io/github/followers/qiaolinwang?style=for-the-badge&logo=github&label=Followers&color=7aa2f7&labelColor=1a1b27" /></a>
+  <a href="https://github.com/qiaolinwang"><img src="https://img.shields.io/github/stars/qiaolinwang?affiliations=OWNER&style=for-the-badge&logo=github&label=Stars&color=7aa2f7&labelColor=1a1b27" /></a>
+  <a href="https://github.com/qiaolinwang"><img src="https://img.shields.io/github/followers/qiaolinwang?style=for-the-badge&logo=github&label=Followers&color=7aa2f7&labelColor=1a1b27" /></a>
 </p>
 
 ### 🎬 Where it started
