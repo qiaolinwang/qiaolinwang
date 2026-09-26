@@ -20,6 +20,7 @@
 ### 📄 Publications
 
 - **AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking**, COLM 2026. [arXiv:2601.17645](https://arxiv.org/abs/2601.17645)
+- **SightSound-R1: Cross-Modal Reasoning Distillation from Vision to Audio Language Models**, ICASSP 2026. [IEEE](https://ieeexplore.ieee.org/document/11463295/) · [arXiv:2509.15661](https://arxiv.org/abs/2509.15661)
 - **Layer-wise Minimal Pair Probing Reveals Contextual Grammatical-Conceptual Hierarchy in Speech Representations**, EMNLP 2025 (SAC Highlight). [arXiv:2509.15655](https://arxiv.org/abs/2509.15655)
 
 ### 🧰 Tools
@@ -28,21 +29,19 @@
   <img src="https://skillicons.dev/icons?i=py,pytorch,cpp,bash,linux,docker,git,github,latex,vscode&theme=dark" />
 </p>
 
-### 🧊 Contributions in 3D
+### ⭐ Stars in 3D
 
 <p align="center">
-  <img src="profile-3d-contrib/profile-night-rainbow.svg" width="100%" />
+  <img src="profile-3d-stars/stars-galaxy.svg" width="100%" />
 </p>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/qiaolinwang/qiaolinwang/output/snake-dark.svg" />
-    <img src="https://raw.githubusercontent.com/qiaolinwang/qiaolinwang/output/snake.svg" width="100%" />
-  </picture>
+  <img src="profile-3d-stars/stars-city.svg" width="100%" />
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=qiaolinwang&theme=tokyonight&hide_border=true" />
+  <img src="https://img.shields.io/github/stars/qiaolinwang?affiliations=OWNER&style=for-the-badge&logo=github&label=Stars&color=7aa2f7&labelColor=1a1b27" />
+  <img src="https://img.shields.io/github/followers/qiaolinwang?style=for-the-badge&logo=github&label=Followers&color=7aa2f7&labelColor=1a1b27" />
 </p>
 
 <p align="center">
