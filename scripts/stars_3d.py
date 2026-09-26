@@ -8,7 +8,8 @@ stars-city.svg    an isometric city: rows = repos, columns = quarters,
                   tower height = stars that quarter (sqrt scale), and a back
                   wall carrying the running total.
 
-Needs GITHUB_TOKEN (the stargazers API no longer answers anonymous calls).
+Needs a token: STARS_TOKEN (a personal access token) if set, else GITHUB_TOKEN.
+The stargazers REST list refuses anonymous calls, so GraphQL is the fallback.
 
     python scripts/stars_3d.py <user> <out_dir> [--from-json stars.json]
 
@@ -19,6 +20,7 @@ import math
 import os
 import random
 import sys
+import urllib.error
 import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
@@ -29,20 +31,59 @@ OTHER = "#a9b1d6"
 FONT = '"Segoe UI",Helvetica,Arial,sans-serif'
 
 
-def get(url, token):
-    req = urllib.request.Request(url, headers={
+def request(url, token, body=None):
+    req = urllib.request.Request(url, data=body, headers={
         "Accept": "application/vnd.github.star+json",
         "Authorization": f"Bearer {token}",
         "User-Agent": "stars-3d",
     })
-    with urllib.request.urlopen(req) as r:
-        return json.load(r)
+    try:
+        with urllib.request.urlopen(req) as r:
+            return json.load(r)
+    except urllib.error.HTTPError as e:
+        e.detail = e.read().decode(errors="replace")[:300]
+        raise
+
+
+STARGAZERS = """query($owner: String!, $name: String!, $after: String) {
+  repository(owner: $owner, name: $name) {
+    stargazers(first: 100, after: $after) {
+      pageInfo { hasNextPage endCursor }
+      edges { starredAt }
+    }
+  }
+}"""
+
+
+def stargazers_rest(full_name, token):
+    dates, page = [], 1
+    while True:
+        batch = request(f"{API}/repos/{full_name}/stargazers?per_page=100&page={page}", token)
+        dates += [s["starred_at"] for s in batch]
+        if len(batch) < 100:
+            return dates
+        page += 1
+
+
+def stargazers_graphql(full_name, token):
+    owner, name = full_name.split("/")
+    dates, after = [], None
+    while True:
+        body = json.dumps({"query": STARGAZERS, "variables": {"owner": owner, "name": name, "after": after}})
+        res = request(f"{API}/graphql", token, body.encode())
+        if "errors" in res:
+            raise RuntimeError(res["errors"][0].get("message", res["errors"]))
+        page = res["data"]["repository"]["stargazers"]
+        dates += [e["starredAt"] for e in page["edges"]]
+        if not page["pageInfo"]["hasNextPage"]:
+            return dates
+        after = page["pageInfo"]["endCursor"]
 
 
 def fetch_stars(user, token):
     repos, page = [], 1
     while True:
-        batch = get(f"{API}/users/{user}/repos?type=owner&per_page=100&page={page}", token)
+        batch = request(f"{API}/users/{user}/repos?type=owner&per_page=100&page={page}", token)
         repos += batch
         if len(batch) < 100:
             break
@@ -51,13 +92,17 @@ def fetch_stars(user, token):
     for repo in repos:
         if repo["stargazers_count"] == 0:
             continue
-        page = 1
-        while True:
-            batch = get(f"{API}/repos/{repo['full_name']}/stargazers?per_page=100&page={page}", token)
-            stars += [(s["starred_at"], repo["name"]) for s in batch]
-            if len(batch) < 100:
-                break
-            page += 1
+        try:
+            dates = stargazers_rest(repo["full_name"], token)
+        except urllib.error.HTTPError as rest_err:
+            print(f"REST stargazers refused for {repo['full_name']}: HTTP {rest_err.code} {rest_err.detail}")
+            try:
+                dates = stargazers_graphql(repo["full_name"], token)
+            except (urllib.error.HTTPError, RuntimeError) as gql_err:
+                sys.exit(f"GraphQL refused too: {getattr(gql_err, 'detail', gql_err)}\n"
+                         "Add a fine-grained personal access token (public repositories, read-only) "
+                         "as the repository secret STARS_TOKEN.")
+        stars += [(d, repo["name"]) for d in dates]
     return sorted(stars)
 
 
@@ -361,7 +406,7 @@ def main():
     if "--from-json" in sys.argv:
         stars = sorted(tuple(s) for s in json.load(open(sys.argv[sys.argv.index("--from-json") + 1])))
     else:
-        stars = fetch_stars(user, os.environ["GITHUB_TOKEN"])
+        stars = fetch_stars(user, os.environ.get("STARS_TOKEN") or os.environ["GITHUB_TOKEN"])
     if not stars:
         sys.exit("no stars yet")
     now = datetime.now(timezone.utc)
