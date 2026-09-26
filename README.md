@@ -17,6 +17,18 @@
 - 🏠 Homepage: [qiaolinwang.github.io](https://qiaolinwang.github.io/) · [LinkedIn](https://www.linkedin.com/in/qiaolin-wang-827545337/)
 - ⚡ I'm also a hip-hop artist and producer. Find me on NetEase Cloud Music: [Venti_J](https://music.163.com/#/artist?id=37561474)
 
+### 🎬 Where it started
+
+My speech AI journey began as a side quest in 2022: teaching a model to speak as Paimon from Genshin Impact.
+
+<p align="center">
+  <a href="https://www.bilibili.com/video/BV16G4y1B7Ey/"><img src="assets/paimon-preview.svg" width="85%" alt="I Used AI to Clone Paimon's Voice (Bilibili)" /></a>
+</p>
+
+- Built and annotated a multi-speaker dataset of ≈48,000 clips (15 h) from 50 Genshin Impact characters, using ECAPA-TDNN for speaker classification and Whisper for transcription
+- Fine-tuned a VITS speech synthesis model on a curated set of Paimon clips
+- Released it as a technical demo on Bilibili (600K+ views) with a public [Colab](https://colab.research.google.com/drive/1HDV84t3N-yUEBXN8dDIDSv6CzEJykCLw) for anyone to try
+
 ### 📄 Publications
 
 - **AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking**, COLM 2026. [arXiv:2601.17645](https://arxiv.org/abs/2601.17645)
